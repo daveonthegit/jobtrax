@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lab 11 — Saved</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+        .success { background: #e8f5e9; border: 1px solid #81c784; padding: 1rem 1.25rem; border-radius: 8px; color: #1b5e20; }
+        .nav { margin-top: 1.5rem; }
+        .nav a { color: #0b57d0; }
+    </style>
+</head>
+<body>
+    <h1>Lab 11</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == "success" %}
+                    <p class="success">{{ message }}</p>
+                {% else %}
+                    <p>{{ message }}</p>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Your submission was processed.</p>
+        {% endif %}
+    {% endwith %}
+    <p class="nav">
+        <a href="{{ url_for('lab11.index') }}">Submit another entry</a>
+        ·
+        <a href="{{ url_for('index') }}">Course hub</a>
+    </p>
+</body>
+</html>

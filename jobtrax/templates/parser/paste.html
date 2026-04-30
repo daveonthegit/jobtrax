@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Parser — JobTrax{% endblock %}
+{% block content %}
+<h1>Paste &amp; parse</h1>
+<p class="muted">Paste a job listing or email. We extract company, title, location, and hints — then you confirm before saving.</p>
+
+<form method="post" action="{{ url_for('jobtrax.parser_preview') }}" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="form-row">{{ form.input_type.label }} {{ form.input_type() }}</div>
+  <div class="form-row">{{ form.raw_text.label }} {{ form.raw_text(rows=14) }}</div>
+  {{ form.submit(class_="btn primary") }}
+</form>
+{% endblock %}

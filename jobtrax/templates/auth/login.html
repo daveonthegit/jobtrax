@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Log in — JobTrax{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+<form method="post" action="{{ url_for('jobtrax.login') }}" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="form-row">{{ form.username.label }} {{ form.username() }}</div>
+  <div class="form-row">{{ form.password.label }} {{ form.password() }}</div>
+  <div class="actions">
+    {{ form.submit(class_="btn primary") }}
+    <a href="{{ url_for('jobtrax.register') }}">Create an account</a>
+  </div>
+</form>
+{% endblock %}

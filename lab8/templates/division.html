@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<!-- Lab 7 — Authored by David Xiao -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="David Xiao">
+    <meta name="description" content="Lab 7 — DIVISION">
+    <title>Lab 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>DIVISION (entered every tournament)</h1>
+
+    <table>
+        <tr>
+            <th>Last name</th>
+            <th>First name</th>
+        </tr>
+
+        {% for row in rows %}
+        <tr>
+            <td>{{ row["member_last_name"] }}</td>
+            <td>{{ row["member_first_name"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

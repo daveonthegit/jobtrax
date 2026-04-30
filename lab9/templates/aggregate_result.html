@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Lab 9 — SQL aggregates & window functions">
+    <title>{{ title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.45; }
+        h1 { margin-bottom: 8px; }
+        pre.sql {
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            padding: 12px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        table { border-collapse: collapse; margin-top: 16px; min-width: 280px; }
+        th, td { border: 1px solid #444; padding: 8px 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        p.note { color: #333; max-width: 720px; }
+        nav { margin-bottom: 24px; }
+        nav a { margin-right: 12px; }
+    </style>
+</head>
+<body>
+    <nav><a href="{{ url_for('lab9.home') }}">Lab 9 home</a></nav>
+
+    <h1>{{ title }}</h1>
+    {% if note %}
+    <p class="note">{{ note }}</p>
+    {% endif %}
+
+    <h2>SQL</h2>
+    <pre class="sql">{{ sql }}</pre>
+
+    {% if columns and rows %}
+    <table>
+        <tr>
+            {% for c in columns %}
+            <th>{{ c }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in rows %}
+        <tr>
+            {% for c in columns %}
+            <td>{{ row[c] if row[c] is not none else '' }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif not rows %}
+    <p><em>No rows returned.</em></p>
+    {% endif %}
+
+</body>
+</html>

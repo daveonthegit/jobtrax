@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — JobTrax{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p class="muted"><a href="{{ url_for('jobtrax.application_detail', aid=aid) }}">← Back to application</a></p>
+<form method="post" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="form-row">{{ form.contact_name.label }} {{ form.contact_name() }}</div>
+  <div class="form-row">{{ form.contact_role.label }} {{ form.contact_role() }}</div>
+  <div class="form-row">{{ form.email.label }} {{ form.email() }}</div>
+  <div class="form-row">{{ form.phone.label }} {{ form.phone() }}</div>
+  <div class="actions">
+    {{ form.submit(class_="btn primary") }}
+    <a href="{{ url_for('jobtrax.application_detail', aid=aid) }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}
