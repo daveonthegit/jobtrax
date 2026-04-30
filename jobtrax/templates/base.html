@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}JobTrax{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('jobtrax.static', filename='css/app.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="layout">
+    <header class="top">
+      <div class="brand"><a href="{{ url_for('jobtrax.home') }}">JobTrax</a></div>
+      {% if session.get('user_id') %}
+      <nav>
+        <a href="{{ url_for('jobtrax.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('jobtrax.company_list') }}">Companies</a>
+        <a href="{{ url_for('jobtrax.application_new') }}">New application</a>
+        <a href="{{ url_for('jobtrax.parser_paste') }}">Parser</a>
+      </nav>
+      <div class="user">
+        <span>{{ session.get('username', '') }}</span>
+        {% if logout_form is defined %}
+        <form method="post" action="{{ url_for('jobtrax.logout') }}" class="inline-form">
+          {{ logout_form.hidden_tag() }}
+          <button type="submit">{{ logout_form.submit.label.text }}</button>
+        </form>
+        {% endif %}
+      </div>
+      {% else %}
+      <nav>
+        <a href="{{ url_for('jobtrax.login') }}">Log in</a>
+        <a href="{{ url_for('jobtrax.register') }}">Register</a>
+      </nav>
+      {% endif %}
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flash">
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

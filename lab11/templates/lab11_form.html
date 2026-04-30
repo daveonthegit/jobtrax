@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lab 11 — User form</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+        .error-banner { background: #ffebee; border: 1px solid #e57373; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; color: #b71c1c; }
+        .field-error { color: #c62828; font-size: 0.9rem; margin: 0.25rem 0 0; padding-left: 1rem; }
+        label { display: inline-block; min-width: 8rem; }
+        p.field-wrap { margin: 0.75rem 0; }
+    </style>
+</head>
+<body>
+    <h2>Enter your information</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            {% if category == "error" %}
+                <div class="error-banner" role="alert">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+
+        <p class="field-wrap">
+            {{ form.users_first_name.label }}
+            {{ form.users_first_name(size=40) }}
+            {% for err in form.users_first_name.errors %}
+                <div class="field-error">{{ err }}</div>
+            {% endfor %}
+        </p>
+
+        <p class="field-wrap">
+            {{ form.users_last_name.label }}
+            {{ form.users_last_name(size=40) }}
+            {% for err in form.users_last_name.errors %}
+                <div class="field-error">{{ err }}</div>
+            {% endfor %}
+        </p>
+
+        <p class="field-wrap">
+            {{ form.users_email.label }}
+            {{ form.users_email(size=40) }}
+            {% for err in form.users_email.errors %}
+                <div class="field-error">{{ err }}</div>
+            {% endfor %}
+        </p>
+
+        <p class="field-wrap">
+            {{ form.users_college.label }}
+            {{ form.users_college(size=40) }}
+            {% for err in form.users_college.errors %}
+                <div class="field-error">{{ err }}</div>
+            {% endfor %}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

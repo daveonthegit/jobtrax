@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Review parse — JobTrax{% endblock %}
+{% block content %}
+<h1>Review parsed fields</h1>
+<p class="muted">Input type: <code>{{ input_type }}</code>. Adjust anything below, then confirm to create or match the company and application.</p>
+
+<details class="card">
+  <summary>Original paste</summary>
+  <pre style="white-space:pre-wrap; font-size:0.85rem;">{{ raw_text }}</pre>
+</details>
+
+<form method="post" action="{{ url_for('jobtrax.parser_confirm') }}" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="card">
+    <div class="form-row">{{ form.company_name.label }} {{ form.company_name() }}</div>
+    <div class="form-row">{{ form.job_title.label }} {{ form.job_title() }}</div>
+    <div class="form-row">{{ form.location.label }} {{ form.location() }}</div>
+    <div class="form-row">{{ form.job_type.label }} {{ form.job_type() }}</div>
+    <div class="form-row">{{ form.salary_range.label }} {{ form.salary_range() }}</div>
+    <div class="form-row">{{ form.deadline.label }} {{ form.deadline() }}</div>
+    <div class="form-row">{{ form.contact_name.label }} {{ form.contact_name() }}</div>
+    <div class="form-row">{{ form.status_id.label }} {{ form.status_id() }}</div>
+    <div class="form-row">{{ form.notes.label }} {{ form.notes(rows=4) }}</div>
+    {{ form.submit(class_="btn primary") }}
+    <a href="{{ url_for('jobtrax.parser_paste') }}" class="btn">Start over</a>
+  </div>
+</form>
+{% endblock %}

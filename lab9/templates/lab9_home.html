@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Lab 9 — Aggregates & window functions">
+    <title>Lab 9 — Aggregates &amp; window functions</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { margin-bottom: 8px; }
+        ul { line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <h1>Lab 9 — Aggregate operations &amp; window functions</h1>
+    <p>SQLite + Flask. On first run, the app creates <code>mydatabase.db</code> with lab sample data if that file does not exist. Delete <code>mydatabase.db</code> to get a fresh database on next start. On PythonAnywhere, <code>cd</code> to your project folder (e.g. <code>mysite</code>) and open the same database in the console.</p>
+
+    <h2>Aggregates</h2>
+    <ul>
+        <li><a href="{{ url_for('lab9.count_women') }}">COUNT(*) — women</a></li>
+        <li><a href="{{ url_for('lab9.count_with_coach') }}">COUNT(*) vs COUNT(member_coach_id)</a></li>
+        <li><a href="{{ url_for('lab9.count_distinct_coaches') }}">COUNT(DISTINCT member_coach_id)</a></li>
+        <li><a href="{{ url_for('lab9.avg_handicap') }}">AVG() and ROUND()</a></li>
+        <li><a href="{{ url_for('lab9.max_min_avg') }}">MAX, MIN, AVG</a></li>
+        <li><a href="{{ url_for('lab9.group_entries') }}">GROUP BY — entries per member</a></li>
+        <li><a href="{{ url_for('lab9.above_average_handicap') }}">Nested query — handicap &gt; average</a></li>
+        <li><a href="{{ url_for('lab9.avg_entry_counts') }}">Nested aggregate — AVG of per-member counts</a></li>
+    </ul>
+
+    <h2>Window functions</h2>
+    <ul>
+        <li><a href="{{ url_for('lab9.window_handicap_rank') }}">ROW_NUMBER() OVER (…) — handicap rank</a></li>
+    </ul>
+</body>
+</html>

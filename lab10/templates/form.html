@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab10</title>
+</head>
+<body>
+    <h1>Flask WTF Form David Xiao</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.name.label }} <br>
+            {{ form.name(size=50) }}
+        </p>
+
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+</body>
+</html>
