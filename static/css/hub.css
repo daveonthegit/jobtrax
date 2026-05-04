@@ -81,41 +81,6 @@ body {
   padding-top: 0.25rem;
 }
 
-.hub-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--hub-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--hub-accent);
-  margin: 0 0 1rem;
-}
-
-.hub-eyebrow::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--hub-accent);
-  box-shadow: 0 0 0 6px var(--hub-accent-dim);
-  animation: hub-pulse 2.8s var(--hub-spring) infinite;
-}
-
-@keyframes hub-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.85;
-  }
-}
-
 .hub-title {
   font-size: clamp(2rem, 4.5vw, 3.25rem);
   font-weight: 700;
@@ -322,7 +287,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hub-eyebrow::before,
   .hub-list li {
     animation: none;
   }
