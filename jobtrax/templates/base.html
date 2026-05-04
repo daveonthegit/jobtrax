@@ -9,52 +9,59 @@
 </head>
 <body>
   <div class="layout">
-    <header class="top">
-      <div class="brand-row">
-        <div class="brand"><a href="{{ url_for('jobtrax.home') }}">JobTrax</a></div>
-        <span class="site-author">David Xiao</span>
+    <aside class="sidebar" aria-label="Primary">
+      <div class="sidebar-brand">
+        <a href="{{ url_for('jobtrax.home') }}">JobTrax</a>
+        <div class="sidebar-meta">David Xiao</div>
       </div>
       {% if session.get('user_id') %}
-      <nav>
+      <nav class="sidebar-nav">
         <a href="{{ url_for('jobtrax.dashboard') }}">Dashboard</a>
         <a href="{{ url_for('jobtrax.company_list') }}">Companies</a>
         <a href="{{ url_for('jobtrax.application_new') }}">New application</a>
         <a href="{{ url_for('jobtrax.parser_paste') }}">Parser</a>
       </nav>
-      <div class="user">
-        <span>{{ session.get('username', '') }}</span>
-        {% if logout_form is defined %}
-        <form method="post" action="{{ url_for('jobtrax.logout') }}" class="inline-form">
-          {{ logout_form.hidden_tag() }}
-          <button type="submit">{{ logout_form.submit.label.text }}</button>
-        </form>
-        {% endif %}
+      <div class="sidebar-footer">
+        <a href="{{ url_for('index') }}">Course hub</a>
+        <div class="sidebar-user">
+          <span>{{ session.get('username', '') }}</span>
+          {% if logout_form is defined %}
+          <form method="post" action="{{ url_for('jobtrax.logout') }}" class="inline-form">
+            {{ logout_form.hidden_tag() }}
+            <button type="submit">{{ logout_form.submit.label.text }}</button>
+          </form>
+          {% endif %}
+        </div>
       </div>
       {% else %}
-      <nav>
+      <nav class="sidebar-nav">
         <a href="{{ url_for('jobtrax.login') }}">Log in</a>
         <a href="{{ url_for('jobtrax.register') }}">Register</a>
       </nav>
+      <div class="sidebar-footer">
+        <a href="{{ url_for('index') }}">Course hub</a>
+      </div>
       {% endif %}
-    </header>
+    </aside>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul class="flash">
-      {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+    <div class="main-column">
+      <main class="main-inner">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flash">
+          {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </main>
 
-    <main>
-      {% block content %}{% endblock %}
-    </main>
-
-    <footer class="site-footer">
-      <p class="site-footer-name">David Xiao</p>
-    </footer>
+      <footer class="site-footer">
+        <p class="site-footer-name">David Xiao</p>
+      </footer>
+    </div>
   </div>
 </body>
 </html>

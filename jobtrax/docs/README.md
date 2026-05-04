@@ -12,6 +12,7 @@ This folder contains the full planning and design package for **Smart Job Tracke
 
 | Document | Purpose |
 |----------|---------|
+| [../../docs/design-system.md](../../docs/design-system.md) | UI tokens, components, layout (course hub + JobTrax app) |
 | [design-rationale.md](design-rationale.md) | Concept critique, schema refinements vs. original draft |
 | [product-requirements.md](product-requirements.md) | PRD: scope, stories, functional/non-functional requirements |
 | [technical-design.md](technical-design.md) | Architecture, stack, security, deployment, risks |
