@@ -12,7 +12,7 @@
 | **P0** | Project skeleton + database + seed | Flask runs; tables exist; `statuses` populated | — |
 | **P1** | Authentication | Register, login, logout; protected routes | P0 |
 | **P2** | Companies CRUD | Full lifecycle for user-scoped companies | P1 |
-| **P3** | Applications + history | Manual create/edit/delete; status changes append history and sync `current_status_id` | P2 |
+| **P3** | Applications + history | Manual create/edit/delete; status changes append history and sync `applications.status_id` | P2 |
 | **P4** | Contacts | CRUD on application detail with ownership checks | P3 |
 | **P5** | Parser + review flow | Paste → preview → confirm; no auto-save | P3 (and P2 for company resolution) |
 | **P6** | Polish + deployment | Validation, UX, PythonAnywhere WSGI | P1–P5 |

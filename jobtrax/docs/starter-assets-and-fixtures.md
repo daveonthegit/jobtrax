@@ -114,7 +114,7 @@ Please complete the HackerRank assessment within 5 days. Good luck!
 |--------------------|-------------|--------------------------------|
 | `company_id`       | Yes         | Must belong to current user   |
 | `job_title`        | Yes         |                                |
-| `current_status_id`| Yes on create | Must exist in `statuses`   |
+| `status_id`        | Yes on create | Must exist in `statuses`   |
 | `location`         | No          |                                |
 | `job_type`         | No          |                                |
 | `salary_range`     | No          | Free text                      |
@@ -146,7 +146,7 @@ Please complete the HackerRank assessment within 5 days. Good luck!
 |---------------------|--------------|
 | `company` resolution | Yes: existing id OR new name |
 | `job_title`         | Yes for new application path   |
-| `current_status_id` | Yes                            |
+| `status_id`         | Yes                            |
 
 ---
 
@@ -156,14 +156,14 @@ After implementation:
 
 ```sql
 -- Each application has at least one history row with matching status
-SELECT a.application_id, a.current_status_id, h.status_id
+SELECT a.application_id, a.status_id AS app_status_id, h.status_id AS latest_hist_status_id
 FROM applications a
 JOIN application_status_history h ON h.history_id = (
   SELECT history_id FROM application_status_history
   WHERE application_id = a.application_id
   ORDER BY changed_at DESC, history_id DESC LIMIT 1
 )
-WHERE a.current_status_id != h.status_id;
+WHERE a.status_id != h.status_id;
 ```
 
 Expect **zero rows** if your invariant holds.

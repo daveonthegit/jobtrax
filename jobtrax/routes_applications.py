@@ -60,7 +60,7 @@ def application_new():
             conn.execute(
                 """
                 INSERT INTO applications (
-                  user_id, company_id, current_status_id, job_title, location,
+                  user_id, company_id, status_id, job_title, location,
                   job_type, salary_range, application_date, deadline, notes
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
@@ -101,7 +101,7 @@ def _load_application(conn, aid: int, uid: int):
         SELECT a.*, c.company_name, s.status_name AS current_status_name
         FROM applications a
         JOIN companies c ON c.company_id = a.company_id
-        JOIN statuses s ON s.status_id = a.current_status_id
+        JOIN statuses s ON s.status_id = a.status_id
         WHERE a.application_id = ? AND a.user_id = ?
         """,
         (aid, uid),
@@ -224,7 +224,7 @@ def application_status(aid):
             abort(404)
         new_sid = form.status_id.data
         conn.execute(
-            "UPDATE applications SET current_status_id = ?, updated_at = datetime('now') WHERE application_id = ?",
+            "UPDATE applications SET status_id = ?, updated_at = datetime('now') WHERE application_id = ?",
             (new_sid, aid),
         )
         conn.execute(

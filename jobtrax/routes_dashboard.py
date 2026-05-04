@@ -29,15 +29,15 @@ def dashboard():
 
         q = """
         SELECT a.application_id, a.job_title, a.application_date, a.deadline,
-               c.company_name, s.status_name, a.current_status_id
+               c.company_name, s.status_name, a.status_id
         FROM applications a
         JOIN companies c ON c.company_id = a.company_id
-        JOIN statuses s ON s.status_id = a.current_status_id
+        JOIN statuses s ON s.status_id = a.status_id
         WHERE a.user_id = ?
         """
         params: list = [uid]
         if status_id:
-            q += " AND a.current_status_id = ?"
+            q += " AND a.status_id = ?"
             params.append(status_id)
         if company_id:
             q += " AND a.company_id = ?"

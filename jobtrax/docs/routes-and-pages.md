@@ -61,7 +61,7 @@ Use a form button or JS-assisted POST; avoid GET logout (crawler prefetch risk).
 | `/applications/new` | GET, POST | Manual create | `companies`, `statuses` | `applications` + first `application_status_history` |
 | `/applications/<int:id>` | GET | Detail: fields, timeline, contacts | app, history, contacts, statuses | — |
 | `/applications/<int:id>/edit` | GET, POST | Edit non-status fields (or all fields—your UX choice) | app if owned | `applications` |
-| `/applications/<int:id>/status` | POST | Change status | app if owned | INSERT `application_status_history`; UPDATE `applications.current_status_id` |
+| `/applications/<int:id>/status` | POST | Change status | app if owned | INSERT `application_status_history`; UPDATE `applications.status_id` |
 | `/applications/<int:id>/delete` | POST | Delete application | app if owned | DELETE app (cascade contacts/history) |
 
 ---

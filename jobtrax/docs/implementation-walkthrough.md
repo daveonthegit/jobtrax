@@ -96,19 +96,19 @@
 
 ## Step 7 — Application CRUD + initial history row
 
-**What you build:** Create/edit/delete applications. On **create**, insert **two** rows: `applications` and `application_status_history` sharing the same `status_id` as `current_status_id`.
+**What you build:** Create/edit/delete applications. On **create**, insert **two** rows: `applications` and `application_status_history` sharing the same `status_id`.
 
 **Why now:** Parser confirm will reuse the same write logic.
 
 **Verify:** One create → two related rows; delete removes children per your FK rules.
 
-**Pitfalls:** Updating `current_status_id` without a matching history row.
+**Pitfalls:** Updating `applications.status_id` without a matching history row.
 
 ---
 
 ## Step 8 — Status changes (timeline)
 
-**What you build:** POST handler that INSERTs history then UPDATEs `current_status_id` in one transaction.
+**What you build:** POST handler that INSERTs history then UPDATEs `applications.status_id` in one transaction.
 
 **Verify:** Three changes yield three ordered history rows.
 

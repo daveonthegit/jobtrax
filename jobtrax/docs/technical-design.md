@@ -75,7 +75,7 @@ Every query for mutable data includes a filter on the authenticated user’s id 
 
 1. User completes form (company, title, status, optional fields).
 2. POST to server; validate.
-3. **Single transaction:** INSERT `applications`; INSERT `application_status_history` with the **same** `status_id` as `current_status_id`, `source_parse_id` NULL.
+3. **Single transaction:** INSERT `applications`; INSERT `application_status_history` with the **same** `status_id` as `applications.status_id`, `parse_id` NULL.
 4. Redirect GET to application detail (PRG).
 
 ---
@@ -86,7 +86,7 @@ Every query for mutable data includes a filter on the authenticated user’s id 
 
 1. **GET** `/parser` — paste form (`input_type`, `raw_text` empty).
 2. **POST** `/parser/preview` — run `parser_service`; store **proposed** structured dict in **server session** (not in `applications` yet). Render review template with editable fields.
-3. **POST** `/parser/confirm` — read edited values from form; in one transaction: optionally create/find company; INSERT `applications` + initial history; optionally INSERT `parsed_inputs` for audit; set `source_parse_id` on the new history row if you log parses.
+3. **POST** `/parser/confirm` — read edited values from form; in one transaction: optionally create/find company; INSERT `applications` + initial history; optionally INSERT `parsed_inputs` for audit; set `parse_id` on the new history row if you log parses.
 
 **Why session for preview:** Avoids orphan `parsed_inputs` rows when users abandon the flow.
 

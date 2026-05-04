@@ -6,7 +6,7 @@ This document records why the final design differs slightly from an early draft 
 
 - **Clear MVP:** Authentication, CRUD for applications and companies, fixed statuses, status history, contacts, and paste-to-parse with confirmation.
 - **Lookup table for statuses** supports referential integrity and history rows keyed by `status_id` (stronger than free-text status strings for a database course).
-- **`parsed_inputs` plus `source_parse_id` on history** supports audit (“this status change came from that paste”) without auto-saving parsed data into core entities.
+- **`parsed_inputs` plus `application_status_history.parse_id`** supports audit (“this status change came from that paste”) without auto-saving parsed data into core entities.
 
 ## Recommended refinements
 
@@ -22,11 +22,11 @@ For “this email might refer to an existing application,” the parser can stor
 
 **Mark as optional** if time is short. MVP can support **new application from job paste** first; email-to-existing matching is phase 2.
 
-### 3. Intentional denormalization: `applications.current_status_id`
+### 3. Intentional denormalization: `applications.status_id`
 
 The latest status is derivable from `application_status_history` (ORDER BY `changed_at` DESC LIMIT 1). Duplicating it on `applications` speeds list views and simplifies queries.
 
-**Invariant (application layer):** After any status change, `current_status_id` must match the newest history row’s `status_id`. SQLite does not enforce this; your Flask code must update both in one logical transaction.
+**Invariant (application layer):** After any status change, `applications.status_id` must match the newest history row’s `status_id`. SQLite does not enforce this; your Flask code must update both in one logical transaction.
 
 **Course narrative:** Document as *intentional denormalization for read performance; integrity maintained in application logic*.
 

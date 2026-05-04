@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS applications (
   application_id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER NOT NULL REFERENCES users(user_id),
   company_id INTEGER NOT NULL REFERENCES companies(company_id),
-  current_status_id INTEGER NOT NULL REFERENCES statuses(status_id),
+  status_id INTEGER NOT NULL REFERENCES statuses(status_id),
   job_title TEXT NOT NULL,
   location TEXT,
   job_type TEXT,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS parsed_inputs (
   raw_text TEXT NOT NULL,
   parsed_company_name TEXT,
   parsed_job_title TEXT,
-  parsed_status_id INTEGER REFERENCES statuses(status_id),
+  status_id INTEGER REFERENCES statuses(status_id),
   parsed_location TEXT,
   parsed_deadline TEXT,
   parsed_contact_name TEXT,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS application_status_history (
   history_id INTEGER PRIMARY KEY AUTOINCREMENT,
   application_id INTEGER NOT NULL REFERENCES applications(application_id) ON DELETE CASCADE,
   status_id INTEGER NOT NULL REFERENCES statuses(status_id),
-  source_parse_id INTEGER REFERENCES parsed_inputs(parse_id),
+  parse_id INTEGER REFERENCES parsed_inputs(parse_id),
   changed_at TEXT NOT NULL DEFAULT (datetime('now')),
   note TEXT
 );

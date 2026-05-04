@@ -144,7 +144,7 @@ def parser_confirm():
             """
             INSERT INTO parsed_inputs (
               user_id, input_type, raw_text,
-              parsed_company_name, parsed_job_title, parsed_status_id,
+              parsed_company_name, parsed_job_title, status_id,
               parsed_location, parsed_deadline, parsed_contact_name
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
@@ -165,7 +165,7 @@ def parser_confirm():
         conn.execute(
             """
             INSERT INTO applications (
-              user_id, company_id, current_status_id, job_title, location,
+              user_id, company_id, status_id, job_title, location,
               job_type, salary_range, application_date, deadline, notes
             ) VALUES (?, ?, ?, ?, ?, ?, ?, NULL, NULL, ?)
             """,
@@ -185,7 +185,7 @@ def parser_confirm():
         conn.execute(
             """
             INSERT INTO application_status_history
-              (application_id, status_id, source_parse_id, note)
+              (application_id, status_id, parse_id, note)
             VALUES (?, ?, ?, ?)
             """,
             (aid, sid, parse_id, "From parser"),

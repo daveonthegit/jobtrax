@@ -2,7 +2,7 @@
 
 **Project:** Smart Job Tracker  
 **DBMS:** SQLite  
-**Normalization target:** 3NF / BCNF, with **one documented intentional denormalization** on `applications.current_status_id`.
+**Normalization target:** 3NF / BCNF, with **one documented intentional denormalization** on `applications.status_id` (cached current pipeline stage).
 
 ---
 
@@ -64,7 +64,7 @@ Seeded; not user-editable in MVP.
 | `application_id` | INTEGER PK | |
 | `user_id` | INTEGER NOT NULL FK → `users` | Denormalized convenience; must match company owner in app logic |
 | `company_id` | INTEGER NOT NULL FK → `companies` | |
-| `current_status_id` | INTEGER NOT NULL FK → `statuses` | **See normalization §4** |
+| `status_id` | INTEGER NOT NULL FK → `statuses.status_id` | **See normalization §4** (same column name as parent PK) |
 | `job_title` | TEXT NOT NULL | |
 | `location` | TEXT NULL | Role location |
 | `job_type` | TEXT NULL | e.g. internship, full-time |
@@ -75,7 +75,7 @@ Seeded; not user-editable in MVP.
 | `created_at` | TIMESTAMP | |
 | `updated_at` | TIMESTAMP | |
 
-**Application-layer invariant:** `current_status_id` equals the `status_id` of the **latest** `application_status_history` row for this application (by `changed_at` / `history_id`).
+**Application-layer invariant:** `applications.status_id` equals the `status_id` of the **latest** `application_status_history` row for this application (by `changed_at` / `history_id`).
 
 ### 2.5 `application_status_history`
 
@@ -84,7 +84,7 @@ Seeded; not user-editable in MVP.
 | `history_id` | INTEGER PK | |
 | `application_id` | INTEGER NOT NULL FK → `applications` ON DELETE CASCADE | |
 | `status_id` | INTEGER NOT NULL FK → `statuses` | |
-| `source_parse_id` | INTEGER NULL FK → `parsed_inputs` | Nullable if manual change |
+| `parse_id` | INTEGER NULL FK → `parsed_inputs.parse_id` | Nullable if manual change (same name as parent PK) |
 | `changed_at` | TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP | |
 | `note` | TEXT NULL | Optional short reason |
 
@@ -111,7 +111,7 @@ Append-only in normal operation (no UI to edit past rows).
 | `raw_text` | TEXT NOT NULL | Consider size limits for UX |
 | `parsed_company_name` | TEXT NULL | Snapshot at confirm time |
 | `parsed_job_title` | TEXT NULL | |
-| `parsed_status_id` | INTEGER NULL FK → `statuses` | |
+| `status_id` | INTEGER NULL FK → `statuses.status_id` | Parsed suggestion at confirm time |
 | `parsed_location` | TEXT NULL | |
 | `parsed_deadline` | TEXT NULL | ISO string or raw |
 | `parsed_contact_name` | TEXT NULL | |
@@ -125,7 +125,7 @@ Append-only in normal operation (no UI to edit past rows).
 
 - **PKs:** Surrogate integer keys on all tables (SQLite-friendly).
 - **FKs:** As listed above; use `ON DELETE CASCADE` from `applications` to `contacts` and `application_status_history` where appropriate.
-- **`parsed_inputs` → history:** `application_status_history.source_parse_id` references `parsed_inputs.parse_id`; multiple history rows could reference the same parse if you ever batch (unusual); typically zero or one.
+- **`parsed_inputs` → history:** `application_status_history.parse_id` references `parsed_inputs.parse_id`; multiple history rows could reference the same parse if you ever batch (unusual); typically zero or one.
 
 ---
 
@@ -157,12 +157,12 @@ Lookup tables (`statuses`) and single-key entities are straightforward. Function
 
 ### 5.3 Intentional denormalization
 
-`applications.current_status_id` **repeats** information that can be derived from `application_status_history`. This is **not** a normalization failure if you treat it as a **cached value** updated with every status transition. Document:
+`applications.status_id` **repeats** information that can be derived from `application_status_history`. This is **not** a normalization failure if you treat it as a **cached value** updated with every status transition. Document:
 
 - **Why:** Faster list queries and simpler templates.
-- **How enforced:** Application code updates `current_status_id` whenever a new history row is inserted for that application.
+- **How enforced:** Application code updates `applications.status_id` whenever a new history row is inserted for that application.
 
-If the course requires **strict** elimination of redundancy, you could drop `current_status_id` and always compute latest status via subquery—at the cost of more complex queries. The recommended student project keeps the column and explains the tradeoff clearly.
+If the course requires **strict** elimination of redundancy, you could drop `applications.status_id` and always compute latest status via subquery—at the cost of more complex queries. The recommended student project keeps the column and explains the tradeoff clearly.
 
 ---
 

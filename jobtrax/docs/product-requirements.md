@@ -50,7 +50,7 @@ Spreadsheets and ad hoc notes are error-prone, hard to query, and often fail to 
 - User registration, login, logout (session-based).
 - Companies CRUD; companies **scoped to the logged-in user**.
 - Applications CRUD; each application linked to one company and one current status from a **seeded lookup table**.
-- On status change: append `application_status_history` and update `applications.current_status_id` consistently.
+- On status change: append `application_status_history` and update `applications.status_id` consistently.
 - Contacts CRUD scoped to an application (with ownership checks via the parent application).
 - Dashboard-style **application list** (can be the home page).
 - Parser: **job listing** and **email** input types; preview → editable review → confirm; writes only on confirm.
@@ -85,7 +85,7 @@ Spreadsheets and ad hoc notes are error-prone, hard to query, and often fail to 
 | FR-AUTH | Session-based authentication; passwords stored as strong hashes; logout clears session. |
 | FR-CO | Full CRUD for companies; each company row owned by exactly one user. |
 | FR-APP | Full CRUD for applications; each application belongs to one user and one company. |
-| FR-STAT | Status values come from seeded `statuses` table; changing status **appends** `application_status_history` and updates `current_status_id`. |
+| FR-STAT | Status values come from seeded `statuses` table; changing status **appends** `application_status_history` and updates `applications.status_id`. |
 | FR-CON | CRUD for contacts; each contact belongs to one application; enforce access via parent application ownership. |
 | FR-PARSE | Accept `input_type` + raw text; run rule-based extractor; show review UI; on confirm, INSERT/UPDATE core entities as chosen; optionally log `parsed_inputs`. |
 | FR-NO-AUTO | Parser output must **never** auto-persist applications or history without an explicit confirm action. |

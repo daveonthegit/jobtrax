@@ -93,7 +93,7 @@ Use **ordered** rules: first strong match wins (document order in code comments)
 
 ### 4.3 Email output
 
-Same `fields` + `evidence` structure; `parsed_status_id` may be NULL if no rule fires.
+Same `fields` + `evidence` structure; `parsed_inputs.status_id` may be NULL if no rule fires.
 
 ---
 
@@ -133,7 +133,7 @@ sequenceDiagram
 
 - Resolve `company_id` (pick existing or create).
 - INSERT `applications` + initial `application_status_history` **or** if phase 2: UPDATE existing app + append history only.
-- INSERT `parsed_inputs` row if auditing; set `source_parse_id` on new history row when applicable.
+- INSERT `parsed_inputs` row if auditing; set `parse_id` on new history row when applicable.
 - Clear session preview payload.
 
 ---
