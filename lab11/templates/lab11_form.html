@@ -1,18 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lab 11 — User form</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
-        .error-banner { background: #ffebee; border: 1px solid #e57373; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; color: #b71c1c; }
-        .field-error { color: #c62828; font-size: 0.9rem; margin: 0.25rem 0 0; padding-left: 1rem; }
-        label { display: inline-block; min-width: 8rem; }
-        p.field-wrap { margin: 0.75rem 0; }
-    </style>
-</head>
-<body>
+{% extends "lab_base.html" %}
+{% block title %}Lab 11 — User form{% endblock %}
+{% block head %}
+<style>
+.lab-wrap { font-family: system-ui, sans-serif; }
+.lab-body-inner {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+.lab-body-inner label { display: inline-block; min-width: 8rem; }
+.lab-body-inner p.field-wrap { margin: 0.75rem 0; }
+.lab-body-inner .error-banner {
+  background: #ffebee;
+  border: 1px solid #e57373;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #b71c1c;
+}
+.lab-body-inner .field-error {
+  color: #c62828;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0;
+  padding-left: 1rem;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="lab-body-inner">
     <h2>Enter your information</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -60,5 +74,5 @@
 
         <p>{{ form.submit() }}</p>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+/* Shared layout for course labs (Lab 8–11); David Xiao visible in lab_base.html */
+
+.lab-wrap {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 1rem 2.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.45;
+  color: #1a1a1a;
+}
+
+.lab-header {
+  padding: 0.75rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #d8dee4;
+}
+
+.lab-header-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0f1419;
+}
+
+.lab-body {
+  margin-bottom: 1rem;
+}
+
+.lab-body h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.lab-body h2 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.lab-body table {
+  border-collapse: collapse;
+  margin-top: 1rem;
+  min-width: 280px;
+}
+
+.lab-body table.narrow {
+  width: 50%;
+  max-width: 100%;
+}
+
+.lab-body th,
+.lab-body td {
+  border: 1px solid #444;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.lab-body th {
+  background: #f2f2f2;
+}
+
+.lab-body nav {
+  margin-bottom: 1.5rem;
+}
+
+.lab-body nav a {
+  margin-right: 12px;
+}
+
+.lab-body pre.sql {
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.lab-body p.note {
+  color: #333;
+  max-width: 720px;
+}
+
+.lab-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d8dee4;
+  text-align: center;
+}
+
+.lab-footer-name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0f1419;
+}

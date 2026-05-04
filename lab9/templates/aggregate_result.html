@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Lab 9 — SQL aggregates & window functions">
-    <title>{{ title }}</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.45; }
-        h1 { margin-bottom: 8px; }
-        pre.sql {
-            background: #f4f4f4;
-            border: 1px solid #ccc;
-            padding: 12px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
-        table { border-collapse: collapse; margin-top: 16px; min-width: 280px; }
-        th, td { border: 1px solid #444; padding: 8px 12px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        p.note { color: #333; max-width: 720px; }
-        nav { margin-bottom: 24px; }
-        nav a { margin-right: 12px; }
-    </style>
-</head>
-<body>
+{% extends "lab_base.html" %}
+{% block title %}{{ title }} — Lab 9{% endblock %}
+{% block content %}
     <nav><a href="{{ url_for('lab9.home') }}">Lab 9 home</a></nav>
 
     <h1>{{ title }}</h1>
@@ -51,6 +29,4 @@
     {% elif not rows %}
     <p><em>No rows returned.</em></p>
     {% endif %}
-
-</body>
-</html>
+{% endblock %}

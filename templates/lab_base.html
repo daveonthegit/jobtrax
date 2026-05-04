@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Lab{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/lab.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="lab-wrap">
+    <header class="lab-header">
+      <span class="lab-header-name">David Xiao</span>
+    </header>
+    <div class="lab-body">
+      {% block content %}{% endblock %}
+    </div>
+    <footer class="lab-footer">
+      <p class="lab-footer-name">David Xiao</p>
+    </footer>
+  </div>
+</body>
+</html>

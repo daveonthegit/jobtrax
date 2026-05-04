@@ -1,42 +1,9 @@
-
-<!DOCTYPE html>
-<!-- Lab 7 — Authored by David Xiao -->
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="David Xiao">
-    <meta name="description" content="Lab 7 — INTERSECTION">
-    <title>Lab 7</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 50%;
-        }
-
-        th, td {
-            border: 1px solid #444;
-            padding: 8px 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
+{% extends "lab_base.html" %}
+{% block title %}Lab 8 — INTERSECTION{% endblock %}
+{% block content %}
     <h1>INTERSECTION</h1>
 
-    <table>
+    <table class="narrow">
         <tr>
             <th>Club ID</th>
             <th>Club Last Name</th>
@@ -55,6 +22,4 @@
         </tr>
         {% endfor %}
     </table>
-
-</body>
-</html>
+{% endblock %}

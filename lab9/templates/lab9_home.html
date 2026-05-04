@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Lab 9 — Aggregates & window functions">
-    <title>Lab 9 — Aggregates &amp; window functions</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { margin-bottom: 8px; }
-        ul { line-height: 1.8; }
-    </style>
-</head>
-<body>
+{% extends "lab_base.html" %}
+{% block title %}Lab 9 — Aggregates &amp; window functions{% endblock %}
+{% block content %}
     <h1>Lab 9 — Aggregate operations &amp; window functions</h1>
     <p>SQLite + Flask. On first run, the app creates <code>mydatabase.db</code> with lab sample data if that file does not exist. Delete <code>mydatabase.db</code> to get a fresh database on next start. On PythonAnywhere, <code>cd</code> to your project folder (e.g. <code>mysite</code>) and open the same database in the console.</p>
 
@@ -30,5 +20,4 @@
     <ul>
         <li><a href="{{ url_for('lab9.window_handicap_rank') }}">ROW_NUMBER() OVER (…) — handicap rank</a></li>
     </ul>
-</body>
-</html>
+{% endblock %}

@@ -10,7 +10,10 @@
 <body>
   <div class="layout">
     <header class="top">
-      <div class="brand"><a href="{{ url_for('jobtrax.home') }}">JobTrax</a></div>
+      <div class="brand-row">
+        <div class="brand"><a href="{{ url_for('jobtrax.home') }}">JobTrax</a></div>
+        <span class="site-author">David Xiao</span>
+      </div>
       {% if session.get('user_id') %}
       <nav>
         <a href="{{ url_for('jobtrax.dashboard') }}">Dashboard</a>
@@ -48,6 +51,10 @@
     <main>
       {% block content %}{% endblock %}
     </main>
+
+    <footer class="site-footer">
+      <p class="site-footer-name">David Xiao</p>
+    </footer>
   </div>
 </body>
 </html>

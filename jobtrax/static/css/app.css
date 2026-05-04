@@ -27,8 +27,31 @@ code { background: #eef1f4; padding: 0.1em 0.35em; border-radius: 4px; }
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
 }
+.brand-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
 .brand { font-weight: 700; font-size: 1.2rem; }
 .brand a { text-decoration: none; color: inherit; }
+.site-author {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0f1419;
+}
+.site-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.site-footer-name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0f1419;
+}
 nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
 nav a { text-decoration: none; }
 nav a:hover { text-decoration: underline; }

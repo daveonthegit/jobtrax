@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="David Xiao">
-    <meta name="description" content="Lab 8 — Set operations (Flask)">
-    <title>Set Operations</title>
-</head>
-<body>
+{% extends "lab_base.html" %}
+{% block title %}Lab 8 — Set operations{% endblock %}
+{% block content %}
     <h1>Set Operations</h1>
 
     <ul>
@@ -15,5 +9,4 @@
         <li><a href="{{ url_for('lab8.difference') }}">Difference Operation</a></li>
         <li><a href="{{ url_for('lab8.division') }}">Division Operation</a></li>
     </ul>
-</body>
-</html>
+{% endblock %}
