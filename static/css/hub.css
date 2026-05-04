@@ -10,7 +10,6 @@
   --hub-text: #edeef0;
   --hub-muted: #8a8f98;
   --hub-accent: #5e6ad2;
-  --hub-accent-dim: rgba(94, 106, 210, 0.15);
   --hub-radius: 8px;
   --hub-radius-lg: 12px;
   --hub-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -47,21 +46,6 @@ body {
 
 .hub-header {
   margin-bottom: 2rem;
-}
-
-.hub-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--hub-accent);
-  background: var(--hub-accent-dim);
-  border: 1px solid rgba(94, 106, 210, 0.35);
-  margin-bottom: 1rem;
 }
 
 .hub-title {

@@ -44,7 +44,6 @@ Semantic colors (JobTrax app only): success, danger, warning, info pairs include
 |---------|-----|---------|
 | Default | `--hub-radius`: **8px** | `--radius`: **8px** |
 | Cards / larger panels | `--hub-radius-lg`: **12px** | `--radius-lg`: **10px** |
-| Pills / badges | **999px** (hub badge) | — |
 
 ### Motion
 
@@ -57,7 +56,7 @@ Semantic colors (JobTrax app only): success, danger, warning, info pairs include
 
 ### Labs 8–11 (`lab.css` — `:root`)
 
-Same palette as the course hub; tokens use the **`--lab-`** prefix (e.g. `--lab-bg`, `--lab-surface`, `--lab-accent`). Templates inherit **`templates/lab_base.html`**, which includes a **Course hub** link and the SQLite · Flask badge.
+Same palette as the course hub; tokens use the **`--lab-`** prefix (e.g. `--lab-bg`, `--lab-surface`, `--lab-accent`). Templates inherit **`templates/lab_base.html`**, which includes a **Course hub** link.
 
 Lab-specific layouts: **`.lab-body-inner`** (Lab 11 forms/success), **`.error-banner`** / **`.field-error`** (validation), **`.success`** (flash-style confirmation).
 
@@ -73,7 +72,6 @@ Lab-specific layouts: **`.lab-body-inner`** (Lab 11 forms/success), **`.error-ba
 | `--hub-text` | Primary text `#edeef0` |
 | `--hub-muted` | Secondary text `#8a8f98` |
 | `--hub-accent` | Accent `#5e6ad2` |
-| `--hub-accent-dim` | Badge / glow tint `rgba(94,106,210,0.15)` |
 
 Background **gradients** on `body` use soft purple ellipses for depth (see `hub.css`).
 
@@ -132,7 +130,7 @@ Class names below live in `app.css` unless noted.
 | Actions row | `.actions` | Flex wrap for toolbars |
 | Filters | `.filters` | Form controls aligned with labels |
 
-Course hub equivalents: **`.hub-wrap`**, **`.hub-header`**, **`.hub-badge`**, **`.hub-title`**, **`.hub-list`**, **`.hub-footer`**.
+Course hub equivalents: **`.hub-wrap`**, **`.hub-header`**, **`.hub-title`**, **`.hub-list`**, **`.hub-footer`**.
 
 ---
 
@@ -160,6 +158,6 @@ Course hub equivalents: **`.hub-wrap`**, **`.hub-header`**, **`.hub-badge`**, **
 | Date | Notes |
 |------|--------|
 | 2026-05 | Initial doc: Linear-inspired dark theme, Inter, split hub/app tokens. |
-| 2026-05 | Labs: `lab.css` aligned with hub; `lab_base.html` badge + back link; Lab 11 inline styles moved to shared CSS. |
+| 2026-05 | Labs: `lab.css` aligned with hub; `lab_base.html` back link; Lab 11 inline styles moved to shared CSS. |
 
 When tokens change, update **`hub.css` / `lab.css` / `app.css`** and this file together.
