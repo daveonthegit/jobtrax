@@ -3,51 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f4f5">
     <title>395 — Labs &amp; JobTrax</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hub.css') }}">
 </head>
 <body>
+    <div class="hub-grain" aria-hidden="true"></div>
     <div class="hub-wrap">
-        <header class="hub-header">
-            <h1 class="hub-title">395 Course hub</h1>
+        <header class="hub-hero">
+            <p class="hub-eyebrow">Course workspace</p>
+            <h1 class="hub-title">395 hub</h1>
             <p class="hub-author">David Xiao</p>
-            <p class="hub-lead">Choose a lab or <strong>JobTrax</strong>. Each area uses its own app, templates, and database under its folder.</p>
+            <p class="hub-lead">Pick a lab or open <strong>JobTrax</strong>. Each area runs its own app, templates, and database inside its folder.</p>
         </header>
 
-        <ul class="hub-list">
-            <li>
-                <a href="{{ url_for('lab8.home') }}">
-                    Lab 8 — Set operations
-                    <span class="desc">UNION, INTERSECT, EXCEPT, relational division</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('lab9.home') }}">
-                    Lab 9 — Aggregates &amp; windows
-                    <span class="desc">COUNT, AVG, GROUP BY, nested queries, ROW_NUMBER</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('lab10.index') }}">
-                    Lab 10 — Flask-WTF forms
-                    <span class="desc">Forms and validation</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('lab11.index') }}">
-                    Lab 11
-                    <span class="desc">User form &amp; SQLite</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ url_for('jobtrax.home') }}">
-                    JobTrax
-                    <span class="desc">Application tracking project</span>
-                </a>
-            </li>
-        </ul>
+        <aside class="hub-aside" aria-label="Labs and projects">
+            <p class="hub-aside-label">Navigate</p>
+            <ul class="hub-list">
+                <li>
+                    <a href="{{ url_for('lab8.home') }}">
+                        <span class="hub-link-top">
+                            <span class="hub-link-title">Lab 8 — Set operations</span>
+                            <span class="hub-link-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </span>
+                        <p class="desc">UNION, INTERSECT, EXCEPT, relational division</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('lab9.home') }}">
+                        <span class="hub-link-top">
+                            <span class="hub-link-title">Lab 9 — Aggregates &amp; windows</span>
+                            <span class="hub-link-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </span>
+                        <p class="desc">COUNT, AVG, GROUP BY, nested queries, ROW_NUMBER</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('lab10.index') }}">
+                        <span class="hub-link-top">
+                            <span class="hub-link-title">Lab 10 — Flask-WTF forms</span>
+                            <span class="hub-link-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </span>
+                        <p class="desc">Forms and validation</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('lab11.index') }}">
+                        <span class="hub-link-top">
+                            <span class="hub-link-title">Lab 11</span>
+                            <span class="hub-link-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </span>
+                        <p class="desc">User form &amp; SQLite</p>
+                    </a>
+                </li>
+                <li class="hub-feature">
+                    <a href="{{ url_for('jobtrax.home') }}">
+                        <span class="hub-link-top">
+                            <span class="hub-link-title">JobTrax</span>
+                            <span class="hub-link-arrow" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </span>
+                        <p class="desc">Application tracking project</p>
+                    </a>
+                </li>
+            </ul>
+        </aside>
 
-        <footer class="hub-footer">David Xiao</footer>
+        <footer class="hub-footer">
+            <span>David Xiao</span>
+            <span class="hub-footer-meta">CS 395</span>
+        </footer>
     </div>
 </body>
 </html>

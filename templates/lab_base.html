@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f4f5">
   <title>{% block title %}Lab{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/lab.css') }}">
   {% block head %}{% endblock %}
 </head>
 <body>
+  <div class="lab-grain" aria-hidden="true"></div>
   <div class="lab-wrap">
     <header class="lab-header">
       <div class="lab-header-top">
@@ -15,9 +17,9 @@
       </div>
       <p class="lab-header-name">David Xiao</p>
     </header>
-    <div class="lab-body">
+    <main class="lab-body">
       {% block content %}{% endblock %}
-    </div>
+    </main>
     <footer class="lab-footer">
       <p class="lab-footer-name">David Xiao</p>
     </footer>
