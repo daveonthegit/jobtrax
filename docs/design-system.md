@@ -1,15 +1,16 @@
 # JobTrax & course hub — design system
 
-This document describes the visual language and CSS variables used by the **395 course hub** (`/`) and the **JobTrax** Flask app (`/jobtrax`). The UI is **Linear-inspired**: dark surfaces, indigo accent, Inter typography, and subtle borders. It is **not** an official Linear product or asset package.
+This document describes the visual language and CSS variables used by the **395 course hub** (`/`), **Labs 8–11** (`/lab8` … `/lab11`), and the **JobTrax** Flask app (`/jobtrax`). The UI is **Linear-inspired**: dark surfaces, indigo accent, Inter typography, and subtle borders. It is **not** an official Linear product or asset package.
 
 ## Implementation map
 
 | Surface | Stylesheet | Loaded from |
 |--------|------------|-------------|
 | Course hub (`templates/index.html`, `templates/home.html`) | `static/css/hub.css` | `url_for('static', filename='css/hub.css')` |
+| Labs 8–11 (templates extending `templates/lab_base.html`) | `static/css/lab.css` | `url_for('static', filename='css/lab.css')` |
 | JobTrax (all templates extending `jobtrax/templates/base.html`) | `jobtrax/static/css/app.css` | `url_for('jobtrax.static', filename='css/app.css')` |
 
-The hub and app share the same aesthetic but **separate token prefixes** (`--hub-*` vs app `--*`) so the course landing page can evolve independently of the app shell.
+The hub, labs, and app share the same aesthetic but **separate token prefixes** (`--hub-*`, `--lab-*`, and JobTrax `--*`) so each surface can evolve independently.
 
 ---
 
@@ -22,6 +23,7 @@ The hub and app share the same aesthetic but **separate token prefixes** (`--hub
 | Font family | **Inter**, with `system-ui`, `-apple-system`, `Segoe UI`, sans-serif fallbacks |
 | Load | Google Fonts: `Inter` weights **400, 500, 600, 700** (both CSS files `@import`) |
 | Hub body | `15px`, line-height **1.55** |
+| Labs body | `15px`, line-height **1.55** (`lab.css`) |
 | JobTrax body | `14px`, line-height **1.5** |
 | Page titles (`h1`) | JobTrax: ~**1.35rem**, weight **700**, letter-spacing **-0.02em** |
 
@@ -52,6 +54,12 @@ Semantic colors (JobTrax app only): success, danger, warning, info pairs include
 ---
 
 ## Design tokens
+
+### Labs 8–11 (`lab.css` — `:root`)
+
+Same palette as the course hub; tokens use the **`--lab-`** prefix (e.g. `--lab-bg`, `--lab-surface`, `--lab-accent`). Templates inherit **`templates/lab_base.html`**, which includes a **Course hub** link and the SQLite · Flask badge.
+
+Lab-specific layouts: **`.lab-body-inner`** (Lab 11 forms/success), **`.error-banner`** / **`.field-error`** (validation), **`.success`** (flash-style confirmation).
 
 ### Course hub (`hub.css` — `:root`)
 
@@ -152,5 +160,6 @@ Course hub equivalents: **`.hub-wrap`**, **`.hub-header`**, **`.hub-badge`**, **
 | Date | Notes |
 |------|--------|
 | 2026-05 | Initial doc: Linear-inspired dark theme, Inter, split hub/app tokens. |
+| 2026-05 | Labs: `lab.css` aligned with hub; `lab_base.html` badge + back link; Lab 11 inline styles moved to shared CSS. |
 
-When tokens change, update **`hub.css` / `app.css`** and this file together.
+When tokens change, update **`hub.css` / `lab.css` / `app.css`** and this file together.

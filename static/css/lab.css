@@ -1,44 +1,220 @@
-/* Shared layout for course labs (Lab 8–11); David Xiao visible in lab_base.html */
+/* Labs 8–11 — Linear-inspired; aligns with static/css/hub.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --lab-bg: #08090a;
+  --lab-surface: #0f1012;
+  --lab-elevated: #141517;
+  --lab-border: rgba(255, 255, 255, 0.08);
+  --lab-border-hover: rgba(255, 255, 255, 0.14);
+  --lab-text: #edeef0;
+  --lab-muted: #8a8f98;
+  --lab-accent: #5e6ad2;
+  --lab-accent-hover: #6f76d9;
+  --lab-accent-dim: rgba(94, 106, 210, 0.15);
+  --lab-radius: 8px;
+  --lab-radius-lg: 12px;
+  --lab-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --lab-danger: #f87171;
+  --lab-danger-bg: rgba(248, 113, 113, 0.12);
+  --lab-success: #4ade80;
+  --lab-success-bg: rgba(74, 222, 128, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--lab-font);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--lab-text);
+  background-color: var(--lab-bg);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(94, 106, 210, 0.14), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 50%, rgba(94, 106, 210, 0.05), transparent 45%);
+}
 
 .lab-wrap {
   max-width: 52rem;
   margin: 0 auto;
-  padding: 0 1rem 2.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.45;
-  color: #1a1a1a;
+  padding: 2.5rem 1.25rem 3rem;
 }
 
 .lab-header {
-  padding: 0.75rem 0;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #d8dee4;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.lab-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--lab-accent);
+  background: var(--lab-accent-dim);
+  border: 1px solid rgba(94, 106, 210, 0.35);
+  margin: 0 0 0.75rem;
+}
+
+.lab-header-top {
+  margin-bottom: 0.5rem;
+}
+
+.lab-back {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lab-accent);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.lab-back:hover {
+  color: var(--lab-accent-hover);
+}
+
+.lab-back:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .lab-header-name {
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: #0f1419;
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--lab-muted);
 }
 
 .lab-body {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .lab-body h1 {
   margin: 0 0 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--lab-text);
 }
 
 .lab-body h2 {
-  margin: 1rem 0 0.5rem;
-  font-size: 1.15rem;
+  margin: 1.35rem 0 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--lab-text);
+}
+
+.lab-body h2:first-of-type {
+  margin-top: 0.75rem;
+}
+
+.lab-body p {
+  color: var(--lab-muted);
+  max-width: 48rem;
+}
+
+.lab-body p.note {
+  color: var(--lab-muted);
+  max-width: 720px;
+}
+
+.lab-body code {
+  background: var(--lab-elevated);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--lab-border);
+  font-size: 0.9em;
+}
+
+/* Link lists (lab home pages) */
+.lab-body > ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lab-body > ul > li {
+  border-radius: var(--lab-radius-lg);
+  border: 1px solid var(--lab-border);
+  background: var(--lab-surface);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.lab-body > ul > li:hover {
+  border-color: var(--lab-border-hover);
+  background: var(--lab-elevated);
+}
+
+.lab-body > ul > li > a {
+  display: block;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  color: var(--lab-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: inherit;
+}
+
+.lab-body > ul > li > a:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 2px;
+}
+
+.lab-body nav {
+  margin-bottom: 1.25rem;
+  padding: 0.65rem 0;
+}
+
+.lab-body nav a {
+  display: inline-block;
+  margin-right: 0.75rem;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--lab-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lab-body nav a:hover {
+  color: var(--lab-accent-hover);
+  text-decoration: underline;
+}
+
+.lab-body nav a:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 2px;
 }
 
 .lab-body table {
   border-collapse: collapse;
   margin-top: 1rem;
   min-width: 280px;
+  width: 100%;
+  font-size: 0.9rem;
 }
 
 .lab-body table.narrow {
@@ -48,46 +224,188 @@
 
 .lab-body th,
 .lab-body td {
-  border: 1px solid #444;
-  padding: 8px 12px;
+  border: 1px solid var(--lab-border);
+  padding: 0.5rem 0.65rem;
   text-align: left;
 }
 
 .lab-body th {
-  background: #f2f2f2;
+  background: var(--lab-elevated);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--lab-muted);
 }
 
-.lab-body nav {
-  margin-bottom: 1.5rem;
-}
-
-.lab-body nav a {
-  margin-right: 12px;
+.lab-body td {
+  background: var(--lab-surface);
+  color: var(--lab-text);
 }
 
 .lab-body pre.sql {
-  background: #f4f4f4;
-  border: 1px solid #ccc;
-  padding: 12px;
+  background: var(--lab-elevated);
+  border: 1px solid var(--lab-border);
+  padding: 1rem 1.15rem;
+  border-radius: var(--lab-radius);
   overflow-x: auto;
   white-space: pre-wrap;
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--lab-muted);
 }
 
-.lab-body p.note {
-  color: #333;
-  max-width: 720px;
+.lab-body em {
+  color: var(--lab-muted);
+}
+
+/* Forms (Lab 10, Lab 11, inline fields) */
+.lab-body input[type="text"],
+.lab-body input[type="email"],
+.lab-body input[type="password"],
+.lab-body input[type="number"],
+.lab-body input[type="date"],
+.lab-body select,
+.lab-body textarea {
+  width: 100%;
+  max-width: 32rem;
+  padding: 0.5rem 0.65rem;
+  margin-top: 0.25rem;
+  border: 1px solid var(--lab-border);
+  border-radius: var(--lab-radius);
+  font: inherit;
+  color: var(--lab-text);
+  background: var(--lab-bg);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lab-body input:focus,
+.lab-body select:focus,
+.lab-body textarea:focus {
+  outline: none;
+  border-color: var(--lab-accent);
+  box-shadow: 0 0 0 3px var(--lab-accent-dim);
+}
+
+.lab-body input[type="submit"],
+.lab-body button[type="submit"] {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--lab-radius);
+  border: none;
+  background: var(--lab-accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lab-body input[type="submit"]:hover,
+.lab-body button[type="submit"]:hover {
+  background: var(--lab-accent-hover);
+}
+
+.lab-body input[type="submit"]:focus-visible,
+.lab-body button[type="submit"]:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 2px;
+}
+
+.lab-body form > p {
+  margin: 0.85rem 0;
+}
+
+.lab-body label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lab-muted);
+}
+
+/* Lab 11 layout */
+.lab-body-inner {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.lab-body-inner h1,
+.lab-body-inner h2 {
+  color: var(--lab-text);
+}
+
+.lab-body-inner label {
+  display: inline-block;
+  min-width: 8rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lab-muted);
+}
+
+.lab-body-inner p.field-wrap {
+  margin: 0.85rem 0;
+}
+
+.lab-body-inner .error-banner {
+  background: var(--lab-danger-bg);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  padding: 0.75rem 1rem;
+  border-radius: var(--lab-radius);
+  margin-bottom: 1rem;
+  color: var(--lab-danger);
+}
+
+.lab-body-inner .field-error {
+  color: var(--lab-danger);
+  font-size: 0.875rem;
+  margin: 0.35rem 0 0;
+  padding-left: 0.25rem;
+}
+
+.lab-body-inner .success {
+  background: var(--lab-success-bg);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  padding: 1rem 1.25rem;
+  border-radius: var(--lab-radius);
+  color: var(--lab-success);
+}
+
+.lab-body-inner .nav {
+  margin-top: 1.5rem;
+  color: var(--lab-muted);
+}
+
+.lab-body-inner .nav a {
+  color: var(--lab-accent);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.lab-body-inner .nav a:hover {
+  color: var(--lab-accent-hover);
+  text-decoration: underline;
 }
 
 .lab-footer {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #d8dee4;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--lab-border);
   text-align: center;
 }
 
 .lab-footer-name {
   margin: 0;
   font-weight: 600;
-  font-size: 1rem;
-  color: #0f1419;
+  font-size: 0.875rem;
+  color: var(--lab-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-body > ul > li,
+  .lab-back,
+  .lab-body nav a,
+  .lab-body input[type="submit"],
+  .lab-body button[type="submit"] {
+    transition: none;
+  }
 }

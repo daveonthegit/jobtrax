@@ -10,7 +10,11 @@
 <body>
   <div class="lab-wrap">
     <header class="lab-header">
-      <span class="lab-header-name">David Xiao</span>
+      <p class="lab-badge">SQLite · Flask</p>
+      <div class="lab-header-top">
+        <a href="{{ url_for('index') }}" class="lab-back">Course hub</a>
+      </div>
+      <p class="lab-header-name">David Xiao</p>
     </header>
     <div class="lab-body">
       {% block content %}{% endblock %}
