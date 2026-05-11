@@ -1,6 +1,6 @@
 # JobTrax design system
 
-This document describes the visual language and CSS variables used by the **JobTrax** Flask app. The system adapts the Apple-like reference in `docs/new-design.md` to the existing server-rendered Flask/Jinja stack: plain HTML templates, one stylesheet, no frontend build step, and no new component library.
+This document describes the visual language and CSS variables used by the **JobTrax** Flask app, the **395 course hub**, and **Labs 8-11**. The system adapts the Apple-like reference in `docs/new-design.md` to the existing server-rendered Flask/Jinja stack: plain HTML templates, CSS files, no frontend build step, and no new component library.
 
 The design goal is a quiet product workspace: near-invisible navigation, generous off-white surfaces, white utility cards, one blue action color, pill-shaped calls to action, SF/system typography, hairline borders, and almost no decorative chrome.
 
@@ -8,11 +8,11 @@ The design goal is a quiet product workspace: near-invisible navigation, generou
 
 | Surface | Stylesheet | Loaded from |
 |--------|------------|-------------|
-| JobTrax app | `jobtrax/static/css/app.css` | `url_for('jobtrax.static', filename='css/app.css')` |
 | Course hub | `static/css/hub.css` | `url_for('static', filename='css/hub.css')` |
 | Labs 8-11 | `static/css/lab.css` | `url_for('static', filename='css/lab.css')` |
+| JobTrax app | `jobtrax/static/css/app.css` | `url_for('jobtrax.static', filename='css/app.css')` |
 
-The Apple-inspired system is implemented for JobTrax. The course hub and lab pages keep their separate stylesheets and token prefixes so coursework surfaces do not unexpectedly change.
+The Apple-inspired system is implemented across all app surfaces. The hub, labs, and JobTrax keep separate stylesheets and token prefixes (`--hub-*`, `--lab-*`, and JobTrax app tokens) so each surface can evolve independently while sharing the same visual language.
 
 ---
 
@@ -98,13 +98,15 @@ JobTrax keeps the existing `aside.sidebar` markup but styles it as a thin global
 - Active/focus state: blue focus outline, no heavy background.
 - Mobile: wraps into a compact black navigation tray.
 
+Labs use the same black navigation treatment in `templates/lab_base.html`, with a compact "Course hub" back link and the author label.
+
 ### Page Canvas
 
-The application background is `--canvas-parchment`. Main content is centered at roughly 980px wide with generous top and bottom padding.
+The page background is parchment/off-white. JobTrax and lab content are centered at roughly 980px wide. The course hub uses a wider 1440px outer container with a centered hero and a 980px navigation grid.
 
 ### Cards
 
-`.card`, `details.card`, and top-level forms are white utility cards:
+JobTrax `.card`, `details.card`, top-level forms, lab forms, lab list rows, lab tables, and hub navigation tiles are white utility cards:
 
 - Background `--canvas`.
 - 1px `--hairline` border.
@@ -129,6 +131,15 @@ Inputs, selects, and textareas are white or pearl controls with hairline borders
 ### Tables
 
 Tables sit inside white cards. Header rows use the parchment surface, 12px uppercase utility text, and hairline separators. Body rows use quiet hover washes and preserve readable 17px body rhythm where space allows.
+
+### Course Hub
+
+The root route (`/`) is a product-style selector:
+
+- Centered hero with `395 hub`, author, and one-line lead.
+- Two-column utility grid on desktop, single column on mobile.
+- JobTrax tile uses the black surface variant to create a clear product entry point.
+- No gradients, grain, or decorative shadows.
 
 ### Flash Messages
 
@@ -163,3 +174,4 @@ Flash messages are rounded white cards with semantic colored text and soft seman
 | Date | Notes |
 |------|-------|
 | 2026-05 | Reworked JobTrax design system toward the Apple-inspired reference: white/parchment surfaces, black global nav, blue pill actions, SF/system type, hairline borders, no decorative gradients. |
+| 2026-05 | Extended the same design system to the course hub and Labs 8-11. |
