@@ -1,16 +1,18 @@
-# JobTrax & course hub — design system
+# JobTrax design system
 
-This document describes the visual language and CSS variables used by the **395 course hub** (`/`), **Labs 8–11** (`/lab8` … `/lab11`), and the **JobTrax** Flask app (`/jobtrax`). The UI is **Linear-inspired**: dark surfaces, indigo accent, Inter typography, and subtle borders. It is **not** an official Linear product or asset package.
+This document describes the visual language and CSS variables used by the **JobTrax** Flask app. The system adapts the Apple-like reference in `docs/new-design.md` to the existing server-rendered Flask/Jinja stack: plain HTML templates, one stylesheet, no frontend build step, and no new component library.
+
+The design goal is a quiet product workspace: near-invisible navigation, generous off-white surfaces, white utility cards, one blue action color, pill-shaped calls to action, SF/system typography, hairline borders, and almost no decorative chrome.
 
 ## Implementation map
 
 | Surface | Stylesheet | Loaded from |
 |--------|------------|-------------|
-| Course hub (`templates/index.html`, `templates/home.html`) | `static/css/hub.css` | `url_for('static', filename='css/hub.css')` |
-| Labs 8–11 (templates extending `templates/lab_base.html`) | `static/css/lab.css` | `url_for('static', filename='css/lab.css')` |
-| JobTrax (all templates extending `jobtrax/templates/base.html`) | `jobtrax/static/css/app.css` | `url_for('jobtrax.static', filename='css/app.css')` |
+| JobTrax app | `jobtrax/static/css/app.css` | `url_for('jobtrax.static', filename='css/app.css')` |
+| Course hub | `static/css/hub.css` | `url_for('static', filename='css/hub.css')` |
+| Labs 8-11 | `static/css/lab.css` | `url_for('static', filename='css/lab.css')` |
 
-The hub, labs, and app share the same aesthetic but **separate token prefixes** (`--hub-*`, `--lab-*`, and JobTrax `--*`) so each surface can evolve independently.
+The Apple-inspired system is implemented for JobTrax. The course hub and lab pages keep their separate stylesheets and token prefixes so coursework surfaces do not unexpectedly change.
 
 ---
 
@@ -19,145 +21,145 @@ The hub, labs, and app share the same aesthetic but **separate token prefixes** 
 ### Typography
 
 | Token / usage | Value |
-|----------------|-------|
-| Font family | **Inter**, with `system-ui`, `-apple-system`, `Segoe UI`, sans-serif fallbacks |
-| Load | Google Fonts: `Inter` weights **400, 500, 600, 700** (both CSS files `@import`) |
-| Hub body | `15px`, line-height **1.55** |
-| Labs body | `15px`, line-height **1.55** (`lab.css`) |
-| JobTrax body | `14px`, line-height **1.5** |
-| Page titles (`h1`) | JobTrax: ~**1.35rem**, weight **700**, letter-spacing **-0.02em** |
+|---------------|-------|
+| `--font-display` | `SF Pro Display`, `SF Pro Text`, `system-ui`, `-apple-system`, `BlinkMacSystemFont`, `"Segoe UI"`, sans-serif |
+| `--font-text` | `SF Pro Text`, `system-ui`, `-apple-system`, `BlinkMacSystemFont`, `"Segoe UI"`, sans-serif |
+| `--font-mono` | `ui-monospace`, `SFMono-Regular`, `Consolas`, monospace |
+| Body | 17px / 1.47 / weight 400 |
+| Page title | clamp 34-40px / 1.1 / weight 600 |
+| Section title | 21px / 1.19 / weight 600 |
+| Utility text | 14px / 1.43 / weight 400 |
+| Fine print | 12px / 1.3 / weight 400 |
 
-Use **600–700** for headings and nav labels; **400–500** for supporting text.
+Use 600 for headings and labels, 400 for body copy, and avoid weight 500. Display text should feel confident but not heavy.
 
-### Color philosophy
-
-- **Background**: Near-black (`#08090a`) avoids harsh contrast with white text.
-- **Surfaces**: Step up lightness in layers (`#0f1012`, `#141517`) instead of heavy shadows.
-- **Borders**: Low-opacity white (`rgba(255,255,255,0.08)` — **0.12** when stronger).
-- **Accent**: Indigo **`#5e6ad2`**; hover **`#6f76d9`**. Use for links, primary buttons, focus rings.
-
-Semantic colors (JobTrax app only): success, danger, warning, info pairs include a soft background tint for flash messages and destructive actions.
-
-### Radius
-
-| Context | Hub | JobTrax |
-|---------|-----|---------|
-| Default | `--hub-radius`: **8px** | `--radius`: **8px** |
-| Cards / larger panels | `--hub-radius-lg`: **12px** | `--radius-lg`: **10px** |
-
-### Motion
-
-- Short transitions (**~150–200ms**) on borders, backgrounds, and color.
-- Respect **`prefers-reduced-motion`**: transitions disabled when the user requests reduced motion.
-
----
-
-## Design tokens
-
-### Labs 8–11 (`lab.css` — `:root`)
-
-Same palette as the course hub; tokens use the **`--lab-`** prefix (e.g. `--lab-bg`, `--lab-surface`, `--lab-accent`). Templates inherit **`templates/lab_base.html`**, which includes a **Course hub** link.
-
-Lab-specific layouts: **`.lab-body-inner`** (Lab 11 forms/success), **`.error-banner`** / **`.field-error`** (validation), **`.success`** (flash-style confirmation).
-
-### Course hub (`hub.css` — `:root`)
+### Color
 
 | Token | Purpose |
 |-------|---------|
-| `--hub-bg` | Page background `#08090a` |
-| `--hub-surface` | List row / panel background `#0f1012` |
-| `--hub-elevated` | Hover surface `#141517` |
-| `--hub-border` | Default border `rgba(255,255,255,0.08)` |
-| `--hub-border-hover` | Hover border `rgba(255,255,255,0.14)` |
-| `--hub-text` | Primary text `#edeef0` |
-| `--hub-muted` | Secondary text `#8a8f98` |
-| `--hub-accent` | Accent `#5e6ad2` |
+| `--canvas` | Pure white `#ffffff` |
+| `--canvas-parchment` | Page canvas `#f5f5f7` |
+| `--surface-pearl` | Secondary button/input fill `#fafafc` |
+| `--surface-black` | Global navigation `#000000` |
+| `--surface-tile-1` | Optional dark panel `#272729` |
+| `--surface-tile-2` | Dark panel variant `#2a2a2c` |
+| `--ink` | Primary text `#1d1d1f` |
+| `--ink-muted` | Secondary text `#333333` |
+| `--ink-soft` | Muted text `#7a7a7a` |
+| `--on-dark` | Text on black/dark surfaces `#ffffff` |
+| `--on-dark-muted` | Muted text on dark surfaces `#cccccc` |
+| `--primary` | Action Blue `#0066cc` |
+| `--primary-focus` | Focus Blue `#0071e3` |
+| `--primary-on-dark` | Link blue on dark surfaces `#2997ff` |
+| `--hairline` | Utility card border `#e0e0e0` |
+| `--divider-soft` | Soft divider `rgba(0, 0, 0, 0.04)` |
 
-Background **gradients** on `body` use soft purple ellipses for depth (see `hub.css`).
+There is one interactive accent: `--primary`. Links, primary buttons, focus rings, and selected states use this blue. Semantic flash colors remain available for success, warning, info, and destructive states.
 
-### JobTrax app (`app.css` — `:root`)
+### Spacing
 
-| Token | Purpose |
-|-------|---------|
-| `--bg-root` | Page background `#08090a` |
-| `--bg-surface` | Cards, sidebar `#0f1012` |
-| `--bg-elevated` | Table headers, secondary buttons `#141517` |
-| `--bg-hover` | Interactive hover wash `rgba(255,255,255,0.06)` |
-| `--border` / `--border-strong` | Default / stronger hairlines |
-| `--text` | Primary `#edeef0` |
-| `--text-secondary` | `#9ca3af` |
-| `--text-muted` | `#6b7280` |
-| `--accent` / `--accent-hover` | Primary actions |
-| `--accent-muted` | Focus ring glow `rgba(94,106,210,0.2)` |
-| `--danger` (+ `--danger-bg`) | Errors, destructive actions |
-| `--success` (+ `--success-bg`) | Success flashes |
-| `--warning` (+ `--warning-bg`) | Warning flashes |
-| `--info` (+ `--info-bg`) | Info flashes |
-| `--sidebar-w` | Sidebar width **240px** |
+| Token | Value | Use |
+|-------|-------|-----|
+| `--space-xxs` | 4px | Fine alignment |
+| `--space-xs` | 8px | Tight controls |
+| `--space-sm` | 12px | Compact groups |
+| `--space-md` | 17px | Body rhythm |
+| `--space-lg` | 24px | Card padding |
+| `--space-xl` | 32px | Page groups |
+| `--space-xxl` | 48px | Page top/bottom |
+| `--space-section` | 80px | Large sections |
+
+Structural layout snaps to the 8px rhythm. Dense operational areas may use 12px and 17px to align with the body text rhythm.
+
+### Shape
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--radius-none` | 0 | Full-width bands and nav |
+| `--radius-sm` | 8px | Utility buttons and compact inputs |
+| `--radius-md` | 11px | Secondary capsules |
+| `--radius-lg` | 18px | Cards and larger panels |
+| `--radius-pill` | 9999px | Primary actions, nav chips, selects |
+
+Pills are the action grammar. Cards use 18px radius, but page sections and the global nav stay square.
 
 ---
 
-## Layout
+## Components
 
-### Course hub
+### Global Navigation
 
-- Centered column **max-width ~42rem**, generous vertical padding.
-- **`.hub-list`**: vertical stack of linked panels; entire row is clickable with hover elevation.
+JobTrax keeps the existing `aside.sidebar` markup but styles it as a thin global navigation bar.
 
-### JobTrax app shell
+- Height: 44px minimum.
+- Background: `--surface-black`.
+- Brand: 17px / 600, white.
+- Links: 12px / 400, muted white by default, white on hover.
+- Active/focus state: blue focus outline, no heavy background.
+- Mobile: wraps into a compact black navigation tray.
 
-- **`.layout`**: flex row; **`aside.sidebar`** is **sticky** on desktop (`min-height: 100vh`).
-- **`.main-column`**: scrollable content column with **`.main-inner`** constraining width (**max-width 56rem**) and padding.
-- **Breakpoint**: below **768px**, sidebar stacks above content; nav becomes horizontal wrap.
+### Page Canvas
 
----
+The application background is `--canvas-parchment`. Main content is centered at roughly 980px wide with generous top and bottom padding.
 
-## Components (JobTrax)
+### Cards
 
-Class names below live in `app.css` unless noted.
+`.card`, `details.card`, and top-level forms are white utility cards:
 
-| Pattern | Classes / elements | Notes |
-|---------|-------------------|--------|
-| Sidebar brand | `.sidebar-brand`, `.sidebar-meta` | Product name + author line |
-| Navigation | `.sidebar-nav a` | Full-width hit targets; hover uses `--bg-hover` |
-| Footer link | `.sidebar-footer` | Includes “Course hub” back to `/` |
-| User / logout | `.sidebar-user`, `.inline-form` | Logout uses ghost button styling |
-| Flash | `.flash`, `.success`, `.danger`, `.warning`, `.info` | Bordered, tinted backgrounds |
-| Card | `.card` | Default panel for filters and content blocks |
-| Tables | `th`, `td` | Header row uses `--bg-elevated`; definition tables use `tbody th` for labels |
-| Forms | `.form-row`, labels, inputs | Dark inputs on `--bg-root`; focus: border `--accent` + `--accent-muted` shadow |
-| Buttons | `.btn`, `.btn.primary`, `.btn.danger`, `button` | Primary filled accent; default ghost/elevated |
-| Actions row | `.actions` | Flex wrap for toolbars |
-| Filters | `.filters` | Form controls aligned with labels |
+- Background `--canvas`.
+- 1px `--hairline` border.
+- 18px radius.
+- 24px padding.
+- No box-shadow by default.
 
-Course hub equivalents: **`.hub-wrap`**, **`.hub-header`**, **`.hub-title`**, **`.hub-list`**, **`.hub-footer`**.
+### Buttons
+
+| Class | Treatment |
+|-------|-----------|
+| `.btn.primary`, `button.primary` | Blue filled pill, white text, 11px x 22px padding |
+| `.btn`, `button` | Pearl secondary capsule, soft ring, near-black text |
+| `.btn.danger` | Pearl capsule with red text and red hairline |
+
+Pressed state uses `transform: scale(0.95)`. Focus-visible uses a 2px `--primary-focus` outline.
+
+### Forms
+
+Inputs, selects, and textareas are white or pearl controls with hairline borders and 11px radius. Selects and search-like inputs use the pill shape when they are compact filter controls. Focus states use a blue hairline plus a soft focus ring.
+
+### Tables
+
+Tables sit inside white cards. Header rows use the parchment surface, 12px uppercase utility text, and hairline separators. Body rows use quiet hover washes and preserve readable 17px body rhythm where space allows.
+
+### Flash Messages
+
+Flash messages are rounded white cards with semantic colored text and soft semantic borders. They should not introduce a second brand accent for normal actions.
 
 ---
 
 ## Accessibility
 
-- **Focus**: `:focus-visible` outlines use the accent color (sidebar links, buttons, text links).
-- **Contrast**: Primary text on dark backgrounds targets readable combinations; muted text is for secondary content only—not long body copy at small sizes.
-- **Semantics**: JobTrax sidebar uses `aria-label="Primary"` on `<aside>`.
-- **Motion**: Reduced-motion query disables transitions.
+- Focus-visible outlines use `--primary-focus`.
+- Body copy defaults to 17px for readability.
+- Touch targets should be at least 44px tall for buttons and primary links.
+- Reduced-motion disables transitions and active scale transforms.
+- Muted text is reserved for secondary or supporting copy, not long paragraphs.
 
 ---
 
-## Conventions for contributors
+## Contributor conventions
 
-1. **Prefer tokens** — Add new UI using existing CSS variables before introducing one-off hex values.
-2. **One accent** — Use `--accent` for interactive emphasis; avoid extra brand colors unless necessary.
-3. **No emoji as icons** — Use SVG icon sets if icons are added later.
-4. **Interactive feedback** — Clickable rows and controls should show hover and focus states (`cursor: pointer` on buttons and `.btn`).
-5. **Hub vs app** — Marketing/course changes go to `hub.css`; product UI goes to `app.css`.
+1. Prefer CSS variables from `app.css` before adding new values.
+2. Use `--primary` for every normal interactive affordance.
+3. Do not add decorative gradients, blobs, grain textures, or card shadows.
+4. Keep cards white, bordered, and rounded at `--radius-lg`.
+5. Keep page structure server-rendered and template-friendly; no new frontend stack unless the project requirements change.
+6. Use SVG/icon libraries only if an icon set is already introduced deliberately.
+7. Update this file and `jobtrax/static/css/app.css` together when tokens change.
 
 ---
 
 ## Changelog
 
 | Date | Notes |
-|------|--------|
-| 2026-05 | Initial doc: Linear-inspired dark theme, Inter, split hub/app tokens. |
-| 2026-05 | Labs: `lab.css` aligned with hub; `lab_base.html` back link; Lab 11 inline styles moved to shared CSS. |
-
-When tokens change, update **`hub.css` / `lab.css` / `app.css`** and this file together.
+|------|-------|
+| 2026-05 | Reworked JobTrax design system toward the Apple-inspired reference: white/parchment surfaces, black global nav, blue pill actions, SF/system type, hairline borders, no decorative gradients. |
