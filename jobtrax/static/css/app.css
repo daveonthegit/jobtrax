@@ -117,12 +117,12 @@ pre {
   position: sticky;
   top: 0;
   z-index: 10;
-  min-height: 52px;
+  height: 56px;
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 28px;
-  padding: 0 clamp(20px, 4vw, 48px);
+  gap: 32px;
+  padding: 0 clamp(32px, 5vw, 64px);
   background: var(--surface-black);
   color: var(--on-dark);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -133,7 +133,7 @@ pre {
   align-items: baseline;
   gap: 14px;
   flex: 0 0 auto;
-  min-height: 52px;
+  min-height: 0;
 }
 
 .sidebar-brand a {
@@ -141,7 +141,7 @@ pre {
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.1;
   text-decoration: none;
 }
 
@@ -153,19 +153,20 @@ pre {
 .sidebar-meta {
   color: var(--on-dark-muted);
   font-size: 13px;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .sidebar-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   flex: 1 1 auto;
   min-width: 0;
+  height: 100%;
 }
 
 .sidebar-nav a {
-  min-height: 36px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   border-radius: var(--radius-pill);
@@ -202,7 +203,8 @@ pre {
   margin-left: auto;
   color: var(--on-dark-muted);
   font-size: 13px;
-  line-height: 1;
+  line-height: 1.1;
+  height: 100%;
 }
 
 .sidebar-footer a {
@@ -213,7 +215,7 @@ pre {
 .sidebar-user {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 12px;
 }
 
 .sidebar-user span {
@@ -575,6 +577,8 @@ form.filters {
 @media (max-width: 833px) {
   .sidebar {
     position: relative;
+    height: auto;
+    min-height: 56px;
     flex-wrap: wrap;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
